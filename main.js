@@ -56,14 +56,12 @@ client.on('message', message => {
     }
 })
 
+console.log(client)
+
 client.on('ready', async () => {
-    await client.user.setPresence({
-        game: {
-            name: 'to //',
-            type: 'LISTENING'
-        },
-        status: 'online'
-    });
+    await client.user.setActivity("//help", {
+        type: "LISTENING",
+    })
 });
 
 client.login(process.env.DISCORD_TOKEN); //keep at last line of file
