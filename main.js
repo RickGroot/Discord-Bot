@@ -56,7 +56,9 @@ client.on('message', message => {
     }
 })
 
-console.log(client)
+client.on('ready', async () => {
+    await client.user.setUsername("MyNewUsername");
+})
 
 client.on('ready', async () => {
     await client.user.setActivity("//help", {
