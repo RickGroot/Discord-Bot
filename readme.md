@@ -1,4 +1,5 @@
-<div style="text-align:center"><img src="https://raw.githubusercontent.com/Rickert41/Discord-Bot/main/utils/logo.png" /></div>
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/Rickert41/Discord-Bot/main/utils/logo.png" /></div>  
+
 # Hi, I'm Foxy!
 Please [invite me](https://discord.com/api/oauth2/authorize?client_id=763801383693844511&permissions=8&scope=bot) to get me into your server!
 
