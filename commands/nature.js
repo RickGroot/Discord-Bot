@@ -7,7 +7,7 @@ module.exports = {
 
         message.channel.send('Getting an awesome nature pic...');
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new Discord.MessageEmbed();
 
         function createPost() {
 

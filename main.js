@@ -51,6 +51,8 @@ client.on('message', message => {
         client.commands.get('catfact').execute(message, args);
     } else if (command === 'fact') {
         client.commands.get('fact').execute(message, args);
+    } else if (command === 'help' || command === 'info') {
+        client.commands.get('help').execute(message, args);
     }
 })
 
