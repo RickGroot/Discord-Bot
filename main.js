@@ -57,10 +57,11 @@ client.on('message', message => {
 })
 
 client.on('ready', async () => {
+    await client.user.setUsername(userName);
+
     await client.user.setActivity(status.text, {
         type: status.type,
     });
-    await client.user.setUsername(userName);
 });
 
 client.login(process.env.DISCORD_TOKEN); //keep at last line of file
