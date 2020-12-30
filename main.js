@@ -6,7 +6,7 @@ client.commands = new Discord.Collection();
 require('dotenv').config()
 
 const prefix = "//";
-const userName = "Foxy";
+const userName = "foxy";
 const status = {
     text: "//help",
     type: "LISTENING"
