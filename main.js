@@ -1,16 +1,16 @@
 const Discord = require('discord.js');
-
 const client = new Discord.Client();
-
-const prefix = '//';
-
 const fs = require('fs');
-
 const guild = client.guilds.cache.get("YOUR_GUILD_ID");
-
 client.commands = new Discord.Collection();
-
 require('dotenv').config()
+
+const prefix = "//";
+const userName = "Foxy";
+const status = {
+    text: "//help",
+    type: "LISTENING"
+}
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
@@ -57,13 +57,10 @@ client.on('message', message => {
 })
 
 client.on('ready', async () => {
-    await client.user.setUsername("MyNewUsername");
-})
-
-client.on('ready', async () => {
-    await client.user.setActivity("//help", {
-        type: "LISTENING",
-    })
+    await client.user.setActivity(status.text, {
+        type: status.type,
+    });
+    await client.user.setUsername(userName);
 });
 
 client.login(process.env.DISCORD_TOKEN); //keep at last line of file
