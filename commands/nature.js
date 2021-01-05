@@ -13,7 +13,7 @@ module.exports = {
 
             const subReddits = [
                 'NatureIsFuckingLit',
-                'pics',
+                'travel',
                 'EarthPorn',
                 'natureporn'
             ];
