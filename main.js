@@ -65,3 +65,4 @@ client.on('ready', async () => {
 });
 
 client.login(process.env.DISCORD_TOKEN); //keep at last line of file
+// client.login(process.env.TEST_TOKEN); //optional login with test bot
