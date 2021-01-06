@@ -93,7 +93,7 @@ module.exports = {
         function userScore() { //sends your score to the chat
             let userData = score[message.author.id];
 
-            if (!userData) {
+            if (!userData) { //checks if user has data stored
                 message.channel.send("Play some games to see your scores!");
             } else {
                 sendScore(userData);
