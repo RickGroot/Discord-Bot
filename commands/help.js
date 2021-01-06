@@ -10,7 +10,7 @@ module.exports = {
             .addField('Useful information', 'I really like cats and randomness, and I would like to share that with everyone. You can always ask me to send an interesting fact or memes!\nI\'m still learning things, so please don\'t hate on my skills :)', false)
             .addFields({
                 name: 'Cool commands',
-                value: '//meme\n//cat\n//nature\n//fact\n//catfact',
+                value: '//meme\n//cat\n//nature\n//fact\n//catfact\n//rpc',
                 inline: true
             },
             {

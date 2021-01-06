@@ -10,6 +10,7 @@ When I'm hunting in the wild I don't want a lot of distraction, that's why I onl
 * //nature
 * //fact
 * //catfact
+* //rpc
 
 ### Some moderator commands
 To prevent total chaos in your server there are some commands that only work when you have the role *Moderator*. These commands have more power and need more responsibility.
