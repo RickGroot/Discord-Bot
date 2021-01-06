@@ -70,11 +70,11 @@ module.exports = {
 
             if (!score[message.author.id]) score[message.author.id] = { //checks if user is in datasheet
                 name: user,
-                win: 0,
-                lost: 0
+                rpc_win: 0,
+                rpc_lost: 0
               };
               let userData = score[message.author.id]; //adds a win
-              userData.win++;
+              userData.rpc_win++;
         }
 
         function addLost() { //adds lost to userdata
@@ -82,11 +82,11 @@ module.exports = {
 
             if (!score[message.author.id]) score[message.author.id] = {
                 name: user,
-                win: 0,
-                lost: 0
+                rpc_win: 0,
+                rpc_lost: 0
               };
               let userData = score[message.author.id];
-              userData.lost++;
+              userData.rpc_lost++;
 
         }
 
@@ -96,8 +96,8 @@ module.exports = {
             const text = new Discord.MessageEmbed()
                 .setTitle("Your score") //puts variables in message (embedded message)
                 .setColor('#03fcf4')
-                .addField('Won', userData.win, true)
-                .addField('Lost', userData.lost, true)
+                .addField('Won', userData.rpc_win, true)
+                .addField('Lost', userData.rpc_lost, true)
                 .setTimestamp()
                 .setFooter('Score of ' + message.author.tag, message.author.displayAvatarURL());
 
