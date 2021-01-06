@@ -50,12 +50,12 @@ module.exports = {
 
         function userDraw(answer) { //gets called when there is a draw
             message.channel.send(answer);
-            setTimeout(() =>message.channel.send("Let\'s try again!"), 800);
+            setTimeout(() => message.channel.send("Let\'s try again!"), 800);
         }
 
         function userWin(answer) { //gets called when the user wins
             message.channel.send(answer);
-            setTimeout(() =>message.channel.send("Congrats, you won!"), 800);
+            setTimeout(() => message.channel.send("Congrats, you won!"), 800);
             addWin();
         }
 
@@ -72,9 +72,9 @@ module.exports = {
                 name: user,
                 rps_win: 0,
                 rps_lost: 0
-              };
-              let userData = score[message.author.id]; //adds a win
-              userData.rps_win++;
+            };
+            let userData = score[message.author.id]; //adds a win
+            userData.rps_win++;
         }
 
         function addLost() { //adds lost to userdata
@@ -84,30 +84,38 @@ module.exports = {
                 name: user,
                 rps_win: 0,
                 rps_lost: 0
-              };
-              let userData = score[message.author.id];
-              userData.rps_lost++;
+            };
+            let userData = score[message.author.id];
+            userData.rps_lost++;
 
         }
 
         function userScore() { //sends your score to the chat
             let userData = score[message.author.id];
 
-            const text = new Discord.MessageEmbed()
-                .setTitle("Your score") //puts variables in message (embedded message)
-                .setColor('#03fcf4')
-                .addField('Won', userData.rps_win, true)
-                .addField('Lost', userData.rps_lost, true)
-                .setTimestamp()
-                .setFooter(message.author.tag, message.author.displayAvatarURL());
+            if (!userData) {
+                message.channel.send("Play some games to see your scores!");
+            } else {
+                sendScore(userData);
+            }
 
-            message.channel.send(text); //sends message to chat
+            function sendScore(userData) {
+                const text = new Discord.MessageEmbed()
+                    .setTitle("Your score") //puts variables in message (embedded message)
+                    .setColor('#03fcf4')
+                    .addField('Won', userData.rps_win, true)
+                    .addField('Lost', userData.rps_lost, true)
+                    .setTimestamp()
+                    .setFooter(message.author.tag, message.author.displayAvatarURL());
+
+                message.channel.send(text); //sends message to chat
+            }
         }
 
 
         fs.writeFile("./commands/data/rps.json", JSON.stringify(score), (err) => {
             if (err) console.error(err)
-          });
+        });
 
     }
 }
