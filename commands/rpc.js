@@ -5,7 +5,7 @@ module.exports = {
 
         const Discord = require('discord.js');
         const fs = require("fs");
-        let score = JSON.parse(fs.readFileSync("./commands/data/data.json", "utf8"));
+        let score = JSON.parse(fs.readFileSync("./commands/data/rpc.json", "utf8"));
 
         if (args.length < 1) { //calls appropriate function
             noArgs();
@@ -99,13 +99,13 @@ module.exports = {
                 .addField('Won', userData.rpc_win, true)
                 .addField('Lost', userData.rpc_lost, true)
                 .setTimestamp()
-                .setFooter('Score of ' + message.author.tag, message.author.displayAvatarURL());
+                .setFooter(message.author.tag, message.author.displayAvatarURL());
 
             message.channel.send(text); //sends message to chat
         }
 
 
-        fs.writeFile("./commands/data/data.json", JSON.stringify(score), (err) => {
+        fs.writeFile("./commands/data/rpc.json", JSON.stringify(score), (err) => {
             if (err) console.error(err)
           });
 
