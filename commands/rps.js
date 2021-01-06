@@ -45,6 +45,8 @@ module.exports = {
                 userWin(answer);
             } else if (args == "score") {
                 userScore(); //shows score
+            } else {
+                noArgs(); //sends game information because argument is invalid
             }
         }
 
