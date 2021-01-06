@@ -53,6 +53,8 @@ client.on('message', message => {
         client.commands.get('fact').execute(message, args);
     } else if (command === 'help' || command === 'info') {
         client.commands.get('help').execute(message, args);
+    } else if (command === 'rps' || command === 'rockpaperscissors') {
+        client.commands.get('rps').execute(message, args);
     }
 })
 
@@ -64,4 +66,5 @@ client.on('ready', async () => {
     });
 });
 
-client.login(process.env.DISCORD_TOKEN); //keep at last line of file
+// client.login(process.env.DISCORD_TOKEN); //keep at last line of file
+client.login(process.env.TEST_TOKEN); //optional login for test bot
