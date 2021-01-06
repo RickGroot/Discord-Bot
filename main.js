@@ -53,8 +53,8 @@ client.on('message', message => {
         client.commands.get('fact').execute(message, args);
     } else if (command === 'help' || command === 'info') {
         client.commands.get('help').execute(message, args);
-    } else if (command === 'rpc' || command === 'rockpaperscissors') {
-        client.commands.get('rpc').execute(message, args);
+    } else if (command === 'rps' || command === 'rockpaperscissors') {
+        client.commands.get('rps').execute(message, args);
     }
 })
 

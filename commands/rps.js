@@ -1,11 +1,11 @@
 module.exports = {
-    name: 'rpc',
+    name: 'rps',
     description: 'this is a rock paper scissors command',
     execute(message, args) {
 
         const Discord = require('discord.js');
         const fs = require("fs");
-        let score = JSON.parse(fs.readFileSync("./commands/data/rpc.json", "utf8"));
+        let score = JSON.parse(fs.readFileSync("./commands/data/rps.json", "utf8"));
 
         if (args.length < 1) { //calls appropriate function
             noArgs();
@@ -17,8 +17,8 @@ module.exports = {
             const text = new Discord.MessageEmbed()
                 .setTitle('Play rock paper scissors with me!') // puts variables in message (embedded message)
                 .setColor('#03fcf4')
-                .addField('How to play', '//rpc rock \n //rpc paper \n //rpc scissors', true)
-                .addField('Check your score', '//rpc score', true)
+                .addField('How to play', '//rps rock \n //rps paper \n //rps scissors', true)
+                .addField('Check your score', '//rps score', true)
                 .setTimestamp();
 
             message.channel.send(text); //sends information message to chat
@@ -70,11 +70,11 @@ module.exports = {
 
             if (!score[message.author.id]) score[message.author.id] = { //checks if user is in datasheet
                 name: user,
-                rpc_win: 0,
-                rpc_lost: 0
+                rps_win: 0,
+                rps_lost: 0
               };
               let userData = score[message.author.id]; //adds a win
-              userData.rpc_win++;
+              userData.rps_win++;
         }
 
         function addLost() { //adds lost to userdata
@@ -82,11 +82,11 @@ module.exports = {
 
             if (!score[message.author.id]) score[message.author.id] = {
                 name: user,
-                rpc_win: 0,
-                rpc_lost: 0
+                rps_win: 0,
+                rps_lost: 0
               };
               let userData = score[message.author.id];
-              userData.rpc_lost++;
+              userData.rps_lost++;
 
         }
 
@@ -96,8 +96,8 @@ module.exports = {
             const text = new Discord.MessageEmbed()
                 .setTitle("Your score") //puts variables in message (embedded message)
                 .setColor('#03fcf4')
-                .addField('Won', userData.rpc_win, true)
-                .addField('Lost', userData.rpc_lost, true)
+                .addField('Won', userData.rps_win, true)
+                .addField('Lost', userData.rps_lost, true)
                 .setTimestamp()
                 .setFooter(message.author.tag, message.author.displayAvatarURL());
 
@@ -105,7 +105,7 @@ module.exports = {
         }
 
 
-        fs.writeFile("./commands/data/rpc.json", JSON.stringify(score), (err) => {
+        fs.writeFile("./commands/data/rps.json", JSON.stringify(score), (err) => {
             if (err) console.error(err)
           });
 
