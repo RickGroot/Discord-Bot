@@ -7,7 +7,7 @@ module.exports = {
         const fs = require("fs");
         let score = JSON.parse(fs.readFileSync("./commands/data/rps.json", "utf8"));
 
-        if (args.length < 1) { //calls appropriate function
+        if (!args.length) { //calls appropriate function
             noArgs();
         } else if (args) {
             withArgs(args);
@@ -25,28 +25,29 @@ module.exports = {
         }
 
         function withArgs(args) { //function for when there are arguments
+            for (var i = 0; i < args.length; i++){
+                let options = ["rock", "paper", "scissors"]; //gets a random answer
+                let answer = options[Math.floor(Math.random() * options.length)];
 
-            let options = ["rock", "paper", "scissors"]; //gets a random answer
-            let answer = options[Math.floor(Math.random() * options.length)];
-
-            if (args == answer) { //all available options for rock paper scissors
-                userDraw(answer);
-            } else if (args == "rock" && answer == "paper") {
-                userLost(answer);
-            } else if (args == "rock" && answer == "scissors") {
-                userWin(answer);
-            } else if (args == "paper" && answer == "scissors") {
-                userLost(answer);
-            } else if (args == "paper" && answer == "rock") {
-                userWin(answer);
-            } else if (args == "scissors" && answer == "rock") {
-                userLost(answer);
-            } else if (args == "scissors" && answer == "paper") {
-                userWin(answer);
-            } else if (args == "score") {
-                userScore(); //shows score
-            } else {
-                noArgs(); //sends game information because argument is invalid
+                if (args[i] == answer) { //all available options for rock paper scissors
+                    userDraw(answer);
+                } else if (args[i] == "rock" && answer == "paper") {
+                    userLost(answer);
+                } else if (args[i] == "rock" && answer == "scissors") {
+                    userWin(answer);
+                } else if (args[i] == "paper" && answer == "scissors") {
+                    userLost(answer);
+                } else if (args[i] == "paper" && answer == "rock") {
+                    userWin(answer);
+                } else if (args[i] == "scissors" && answer == "rock") {
+                    userLost(answer);
+                } else if (args[i] == "scissors" && answer == "paper") {
+                    userWin(answer);
+                } else if (args[i] == "score") {
+                    userScore(); //shows score
+                } else {
+                    noArgs(); //sends game information because argument is invalid
+                }
             }
         }
 
