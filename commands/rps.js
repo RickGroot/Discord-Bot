@@ -107,7 +107,7 @@ module.exports = {
                     .setColor('#03fcf4')
                     .addField('Won', userData.rps_win, true)
                     .addField('Lost', userData.rps_lost, true)
-                    .addField('Still in developent', 'This functionality is still in development phase', false)
+                    .addField('Scores will be reset', 'Every once in a while scores will be reset', false)
                     .setTimestamp()
                     .setFooter(message.author.tag, message.author.displayAvatarURL());
 
