@@ -105,7 +105,7 @@ module.exports = {
                     .setColor('#03fcf4')
                     .addField('Won', userData.rps_win, true)
                     .addField('Lost', userData.rps_lost, true)
-                    .addField('Still in developent', false)
+                    .addField('Still in developent', 'This functionality is still in development phase', false)
                     .setTimestamp()
                     .setFooter(message.author.tag, message.author.displayAvatarURL());
 
