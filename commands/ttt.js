@@ -4,8 +4,8 @@
 7 8 9
 */
 module.exports = {
-    name: 'rps',
-    description: 'this is a rock paper scissors command',
+    name: 'ttt',
+    description: 'this is a ttt command',
     execute(message, args) {
         const Discord = require('discord.js');
         const fs = require("fs");
@@ -19,7 +19,17 @@ module.exports = {
 
         function explainttt() 
         {
+            const text = new Discord.MessageEmbed()
+            .setTitle("TTT") //puts variables in message (embedded message)
+            .setColor('#03fcf4')
+            .addField('x', '1 \n 4 \n 7', true)
+            .addField('x', '2 \n 5 \n 8', true)
+            .addField('x', '3 \n 6 \n 9', true)
+            .addField('How to play', 'Just do //ttt 1-9, where 1-9 are places in the field like \n shown above, so for example //ttt 1', false)
+            .setTimestamp()
+            .setFooter(message.author.tag, message.author.displayAvatarURL());
 
+            message.channel.send(text); //sends message to chat
         }
 
         function ttt(args) 
@@ -36,26 +46,85 @@ module.exports = {
                 var row = 1;
             }else if (move > 6 && move < 10){
                 var row = 2;
+            }else if(move == "score"){
+                userScore();
+                return;
             }else {
                 explainttt();
+                return;
             }
             move = move % 3;
-            if (move == 1){
+            if (move == 1 && userdata.field[row][0] == " "){
                 userdata.field[row][0] = 'X';
-            } else if (move == 2){
+            } else if (move == 2 && userdata.field[row][1] == " "){
                 userdata.field[row][1] = 'X';
-            } else if (move == 0){
+            } else if (move == 0 && userdata.field[row][2] == " "){
                 userdata.field[row][2] = 'X';
             }else {
                 explainttt();
+                return;
+            }
+            userdata.turn++;
+            checkWin(userdata);
+            if (userdata.win == true){
+                drawttt(userdata);
+                userWin();
+                reset(userdata);
+                return;
             }
             //als 2 speler dan niet dit stuk
+            var validResponse = false 
+            while (validResponse == false){
+                var botmove =  Math.floor(Math.random() * 10); 
+                if (botmove > 0 && botmove < 4) {
+                    var row = 0;
+                }else if (botmove > 3 && botmove < 7){
+                    var row = 1;
+                }else if (botmove > 6 && botmove < 10){
+                    var row = 2;
+                }else {
+                    explainttt();
+                }
+                botmove = botmove % 3;
+                if (botmove == 1 && (userdata.field[row][0] == " ")){
+                    userdata.field[row][0] = 'O';
+                    validResponse = true;
+                } else if (botmove == 2 && (userdata.field[row][1] == " ")){
+                    userdata.field[row][1] = 'O';
+                    validResponse = true;
+                } else if (botmove == 0 && (userdata.field[row][2] == " ")){
+                    userdata.field[row][2] = 'O';
+                    validResponse = true;
+                }else if(userdata.turn >= 9){
+                    userDraw();
+                    drawttt(userdata);
+                    reset(userdata);
+                    return;
+                }
+            }
+            userdata.turn++;
+            checkWin(userdata);
+            if (userdata.win == true){
+                drawttt(userdata);
+                userLost();
+                reset(userdata);
+                return;
+            }
+            drawttt(userdata);
+        }
 
+        function reset(userdata){
+            for (var i = 0; i < 3; i++){
+                for (var j = 0; j < 3; j++){
+                    userdata.field[i][j] = " ";
+                }
+            }
+            userdata.win = false;
+            userdata.turn = 0;
         }
 
         function checkWin(userdata)
         {
-            var row = 0;
             /*
                 x x x OR o o o
  
@@ -67,8 +136,50 @@ module.exports = {
                   x   OR   o 
                 x        o    
             */
+            for(var i = 0; i < 3; i++){
+                if((userdata.field[i][0] == "X") && (userdata.field[i][1] == "X") && (userdata.field[i][2] =="X")){
+                    userdata.win = true;
+                    return;
+                }
+            }
+            for(var i = 0; i < 3; i++){
+                if((userdata.field[i][0] == "O") && (userdata.field[i][1] == "O") && (userdata.field[i][2] =="O")){
+                    userdata.win = true;
+                    return;
+                }
+            }
+            for(var i = 0; i < 3; i++){
+                if((userdata.field[0][i] == "O") && (userdata.field[1][i] == "O") && (userdata.field[2][i] =="O")){
+                    userdata.win = true;
+                    return;
+                }
+            }
+            for(var i = 0; i < 3; i++){
+                if((userdata.field[0][i] == "X") && (userdata.field[1][i] == "X") && (userdata.field[2][i] =="X")){
+                    userdata.win = true;
+                    return;
+                }
+            }
+            if((userdata.field[0][0] == "X") && (userdata.field[1][1] == "X") && (userdata.field[2][2] == "X")){
+                userdata.win = true;
+            } else if((userdata.field[0][0] == "O") && (userdata.field[1][1] == "O") && (userdata.field[2][2] == "O")) {
+                userdata.win = true;
+            } else if((userdata.field[0][2] == "X") && (userdata.field[1][1] == "X") && (userdata.field[2][0] == "X")){
+                userdata.win = true;
+            } else if((userdata.field[0][2] == "O") && (userdata.field[1][1] == "O") && (userdata.field[2][0] == "O")){
+                userdata.win = true;
+            }else {
+                userdata.win = false;
+            }     
+        }
 
+        function drawttt(userdata)
+        {
+            var toprint =   userdata.field[0][0] + " | " + userdata.field[0][1] + " | " + userdata.field[0][2] + "\n" +
+                            userdata.field[1][0] + " | " + userdata.field[1][1] + " | " + userdata.field[1][2] + "\n" +
+                            userdata.field[2][0] + " | " + userdata.field[2][1] + " | " + userdata.field[2][2]
             
+            message.channel.send(toprint);
         }
 
         function firstplay()
@@ -85,60 +196,59 @@ module.exports = {
             */
             data[message.author.id] = { //checks if user is in datasheet
                 name: user,
-                ttt_win: 0,
+                win: false,
+                ttt_wins: 0,
                 ttt_lost: 0,
+                turn: 0,
                 field: [
-                    ['', '', ''],
-                    ['', '', ''],
-                    ['', '', '']
+                    [' ', ' ', ' '],
+                    [' ', ' ', ' '],
+                    [' ', ' ', ' ']
                 ]
             };
         }
 
-        function userDraw(answer) { //gets called when there is a draw
-            message.channel.send(answer);
+        function userDraw() { //gets called when there is a draw
             setTimeout(() => message.channel.send("Let\'s try again!"), 800);
         }
 
-        function userWin(answer, num_wins) { //gets called when the user wins
-            message.channel.send(answer);
+        function userWin() { //gets called when the user wins
             setTimeout(() => message.channel.send("Congrats, you won!"), 800);
-            addWin(num_wins);
+            addWin();
         }
 
-        function userLost(answer, num_lost) { //gets called when a user loses
-            message.channel.send(answer);
+        function userLost() { //gets called when a user loses
             setTimeout(() => message.channel.send("Better luck next time!"), 800);
-            addLost(num_lost);
+            addLost();
         }
 
-        function addWin(num_wins) { //adds a win to userdata
+        function addWin() { //adds a win to userdata
             let user = message.author.tag.toString();
 
-            if (!score[message.author.id]) score[message.author.id] = { //checks if user is in datasheet
+            if (!data[message.author.id]) data[message.author.id] = { //checks if user is in datasheet
                 name: user,
-                ttt_win: 0,
+                ttt_wins: 0,
                 ttt_lost: 0
             };
-            let userData = score[message.author.id]; //adds a win
-            userData.ttt_win += num_wins;
+            let userData = data[message.author.id]; //adds a win
+            userData.ttt_wins++;
         }
 
         function addLost(num_lost) { //adds lost to userdata
             let user = message.author.tag.toString();
 
-            if (!score[message.author.id]) score[message.author.id] = {
+            if (!data[message.author.id]) data[message.author.id] = {
                 name: user,
-                rps_win: 0,
-                rps_lost: 0
+                ttt_wins: 0,
+                ttt_lost: 0
             };
-            let userData = score[message.author.id];
-            userData.ttt_lost += num_lost;
+            let userData = data[message.author.id];
+            userData.ttt_lost++;
 
         }
 
         function userScore() { //sends your score to the chat
-            let userData = score[message.author.id];
+            let userData = data[message.author.id];
 
             if (!userData) { //checks if user has data stored
                 message.channel.send("Play some games to see your scores!");
@@ -150,7 +260,7 @@ module.exports = {
                 const text = new Discord.MessageEmbed()
                     .setTitle("Your score") //puts variables in message (embedded message)
                     .setColor('#03fcf4')
-                    .addField('Won', userData.ttt_win, true)
+                    .addField('Won', userData.ttt_wins, true)
                     .addField('Lost', userData.ttt_lost, true)
                     .addField('Scores will be reset', 'Every once in a while scores will be reset', false)
                     .setTimestamp()
@@ -161,7 +271,7 @@ module.exports = {
         }
 
 
-        fs.writeFile("./commands/data/rps.json", JSON.stringify(score), (err) => {
+        fs.writeFile("./commands/data/ttt.json", JSON.stringify(data), (err) => {
             if (err) console.error(err)
         });
 
