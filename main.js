@@ -58,7 +58,8 @@ client.on('message', message => {
     } else if (command === 'ttt' || command === 'tictactoe'){
         client.commands.get('ttt').execute(message, args);
     } else if (command === 'update'){
-        client.commands.get('update').execute(message, args);
+        message.channel.send('Tic Tac Toe will be back soon...')
+        // client.commands.get('update').execute(message, args);
     } else {
         message.channel.send('Unknown command! Try **//help**.')
     }
