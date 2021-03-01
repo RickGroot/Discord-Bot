@@ -9,8 +9,8 @@ module.exports = {
             .setColor('#f58b00')
             .addField('1.1', 'Update 1.1 is now online and running! This update contains Tic Tac Toe, and better image content.', false)
             .addFields({
-                name: 'New command',
-                value: '//ttt',
+                name: 'New commands',
+                value: '//ttt\n//update',
                 inline: true
             },
             {
