@@ -11,6 +11,7 @@ When I'm hunting in the wild I don't want a lot of distraction, that's why I onl
 * //fact
 * //catfact
 * //rps
+* //ttt
 
 ### Some moderator commands
 To prevent total chaos in your server there are some commands that only work when you have the role *Moderator*. These commands have more power and need more responsibility.
@@ -19,8 +20,8 @@ To prevent total chaos in your server there are some commands that only work whe
 * //unmute
 * //undeafen
 
-## Look at some code stuff
-You can browse through this project if you are interested in the source code. In the [wiki](https://github.com/Rickert41/Discord-Bot/wiki) everything gets explained more in deapth.
+<!-- ## Look at some code stuff
+You can browse through this project if you are interested in the source code. In the [wiki](https://github.com/Rickert41/Discord-Bot/wiki) everything gets explained more in deapth. -->
 
 # Edit code locally
 If you want to edit this locally on your own device you need to clone this code. Get started by creating a project folder and cloning the files to that folder.
