@@ -10,7 +10,7 @@ module.exports = {
             .addField('Useful information', 'I really like cats and randomness, and I would like to share that with everyone. You can always ask me to send an interesting fact or memes!\nI\'m still learning things, so please don\'t hate on my skills :)', false)
             .addFields({
                 name: 'Cool commands',
-                value: '//meme\n//cat\n//nature\n//fact\n//catfact\n//rps',
+                value: '//meme\n//cat\n//nature\n//fact\n//catfact\n//rps\n//ttt',
                 inline: true
             },
             {
@@ -18,7 +18,7 @@ module.exports = {
                 value: '//mute (playertag)\n//unmute\n//deaf (playertag)\n//unmute\n//undeaf',
                 inline: true
             })
-            .setFooter('Code: https://github.com/Rickert41/Discord-Bot', 'https://raw.githubusercontent.com/Rickert41/Discord-Bot/main/utils/logo.png')
+            .setFooter('Code: https://github.com/rickgroot/Discord-Bot', 'https://raw.githubusercontent.com/rickgroot/Discord-Bot/main/utils/logo.png')
             .setTimestamp()
             .setThumbnail('attachment://logo.png');
 
