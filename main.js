@@ -57,6 +57,10 @@ client.on('message', message => {
         client.commands.get('rps').execute(message, args);
     } else if (command === 'ttt' || command === 'tictactoe'){
         client.commands.get('ttt').execute(message, args);
+    } else if (command === 'update'){
+        client.commands.get('update').execute(message, args);
+    } else {
+        message.channel.send('Unknown command! Try **_//help_**.')
     }
 })
 

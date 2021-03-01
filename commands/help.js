@@ -18,7 +18,7 @@ module.exports = {
                 value: '//mute (playertag)\n//unmute\n//deaf (playertag)\n//unmute\n//undeaf',
                 inline: true
             })
-            .setFooter('Code: https://github.com/Rickert41/Discord-Bot', 'https://raw.githubusercontent.com/Rickert41/Discord-Bot/main/utils/logo.png')
+            .setFooter('Code: https://github.com/rickgroot/Discord-Bot', 'https://raw.githubusercontent.com/rickgroot/Discord-Bot/main/utils/logo.png')
             .setTimestamp()
             .setThumbnail('attachment://logo.png');
 
