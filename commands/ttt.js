@@ -19,13 +19,10 @@ module.exports = {
 
         function explainttt() 
         {
-            const text = new Discord.MessageEmbed()
-            .setTitle("TTT") //puts variables in message (embedded message)
+            const text = new Discord.MessageEmbed() //puts variables in message (embedded message)
             .setColor('#03fcf4')
-            .addField('x', '1 \n 4 \n 7', true)
-            .addField('x', '2 \n 5 \n 8', true)
-            .addField('x', '3 \n 6 \n 9', true)
-            .addField('How to play', 'Just do //ttt 1-9, where 1-9 are places in the field like \n shown above, so for example //ttt 1', false)
+            .addField('Tic Tac Toe', '| 1 | 2 | 3 |\n━━━━\n| 4 | 5 | 6 |\n━━━━\n| 7 | 8 | 9 |', false)
+            .addField('How to play', 'Choose a field with "//ttt 1-9", where 1-9 are places in the field like \n shown above. \n Example: //ttt 1', false)
             .setTimestamp()
             .setFooter(message.author.tag, message.author.displayAvatarURL());
 
@@ -54,11 +51,11 @@ module.exports = {
                 return;
             }
             move = move % 3;
-            if (move == 1 && userdata.field[row][0] == " "){
+            if (move == 1 && userdata.field[row][0] == " - "){
                 userdata.field[row][0] = 'X';
-            } else if (move == 2 && userdata.field[row][1] == " "){
+            } else if (move == 2 && userdata.field[row][1] == " - "){
                 userdata.field[row][1] = 'X';
-            } else if (move == 0 && userdata.field[row][2] == " "){
+            } else if (move == 0 && userdata.field[row][2] == " - "){
                 userdata.field[row][2] = 'X';
             }else {
                 explainttt();
@@ -86,13 +83,13 @@ module.exports = {
                     explainttt();
                 }
                 botmove = botmove % 3;
-                if (botmove == 1 && (userdata.field[row][0] == " ")){
+                if (botmove == 1 && (userdata.field[row][0] == " - ")){
                     userdata.field[row][0] = 'O';
                     validResponse = true;
-                } else if (botmove == 2 && (userdata.field[row][1] == " ")){
+                } else if (botmove == 2 && (userdata.field[row][1] == " - ")){
                     userdata.field[row][1] = 'O';
                     validResponse = true;
-                } else if (botmove == 0 && (userdata.field[row][2] == " ")){
+                } else if (botmove == 0 && (userdata.field[row][2] == " - ")){
                     userdata.field[row][2] = 'O';
                     validResponse = true;
                 }else if(userdata.turn >= 9){
@@ -201,9 +198,9 @@ module.exports = {
                 ttt_lost: 0,
                 turn: 0,
                 field: [
-                    [' ', ' ', ' '],
-                    [' ', ' ', ' '],
-                    [' ', ' ', ' ']
+                    [' - ', ' - ', ' - '],
+                    [' - ', ' - ', ' - '],
+                    [' - ', ' - ', ' - ']
                 ]
             };
         }
@@ -257,11 +254,14 @@ module.exports = {
             }
 
             function sendScore(userData) {
+                let datarps = JSON.parse(fs.readFileSync("./commands/data/rps.json", "utf8"));
+                let userDatarps = datarps[message.author.id]
+
                 const text = new Discord.MessageEmbed()
-                    .setTitle("Your score") //puts variables in message (embedded message)
+                    .setTitle("Your scores") //puts variables in message (embedded message)
                     .setColor('#03fcf4')
-                    .addField('Won', userData.ttt_wins, true)
-                    .addField('Lost', userData.ttt_lost, true)
+                    .addField('Tic Tac Toe','Wins: ' + userData.ttt_wins + '\n' + 'Lost: ' +userData.ttt_lost, true)
+                    .addField('Rock Paper Scissors','Wins: ' + userDatarps.rps_win + '\n' + 'Lost: ' +userDatarps.rps_lost, true)
                     .addField('Scores will be reset', 'Every once in a while scores will be reset', false)
                     .setTimestamp()
                     .setFooter(message.author.tag, message.author.displayAvatarURL());
