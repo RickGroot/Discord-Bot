@@ -55,6 +55,8 @@ client.on('message', message => {
         client.commands.get('help').execute(message, args);
     } else if (command === 'rps' || command === 'rockpaperscissors') {
         client.commands.get('rps').execute(message, args);
+    } else if (command === 'ttt'){
+        client.commands.get('ttt').execute(message, args);
     }
 })
 
