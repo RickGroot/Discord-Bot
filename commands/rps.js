@@ -102,11 +102,14 @@ module.exports = {
             }
 
             function sendScore(userData) {
+                let datattt = JSON.parse(fs.readFileSync("./commands/data/ttt.json", "utf8"));
+                let userDatattt = datattt[message.author.id]
+
                 const text = new Discord.MessageEmbed()
-                    .setTitle("Your score") //puts variables in message (embedded message)
+                    .setTitle("Your scores") //puts variables in message (embedded message)
                     .setColor('#03fcf4')
-                    .addField('Won', userData.rps_win, true)
-                    .addField('Lost', userData.rps_lost, true)
+                    .addField('Tic Tac Toe','Wins: ' + userDatattt.ttt_wins + '\n' + 'Lost: ' +userDatattt.ttt_lost, true)
+                    .addField('Rock Paper Scissors','Wins: ' + userData.rps_win + '\n' + 'Lost: ' +userData.rps_lost, true)
                     .addField('Scores will be reset', 'Every once in a while scores will be reset', false)
                     .setTimestamp()
                     .setFooter(message.author.tag, message.author.displayAvatarURL());

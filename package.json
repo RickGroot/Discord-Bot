@@ -10,8 +10,9 @@
   "author": "Rick Groot",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/uws": "^10.149.0",
     "discord-mentions": "^3.2.0",
-    "discord.js": "^12.3.1",
+    "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "fs": "0.0.1-security",
     "got": "^11.8.0",

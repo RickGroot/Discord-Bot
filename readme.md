@@ -11,6 +11,7 @@ When I'm hunting in the wild I don't want a lot of distraction, that's why I onl
 * //fact
 * //catfact
 * //rps
+* //ttt
 
 ### Some moderator commands
 To prevent total chaos in your server there are some commands that only work when you have the role *Moderator*. These commands have more power and need more responsibility.
@@ -19,8 +20,8 @@ To prevent total chaos in your server there are some commands that only work whe
 * //unmute
 * //undeafen
 
-## Look at some code stuff
-You can browse through this project if you are interested in the source code. In the [wiki](https://github.com/Rickert41/Discord-Bot/wiki) everything gets explained more in deapth.
+<!-- ## Look at some code stuff
+You can browse through this project if you are interested in the source code. In the [wiki](https://github.com/Rickert41/Discord-Bot/wiki) everything gets explained more in deapth. -->
 
 # Edit code locally
 If you want to edit this locally on your own device you need to clone this code. Get started by creating a project folder and cloning the files to that folder.
@@ -33,6 +34,15 @@ Change directory to the cloned folder.
 $ cd Discord-Bot
 ```
 Create a new file, named *".env"*, and paste the content of the *".env.example"* into that new file. You will also be pasting your own bot token into the .env file. To do this you must create an application at the [Discord development portal](https://discord.com/developers/applications), navigate to *"Bot"* via the menu and replace *"YOUR_BOT_TOKEN_HERE"* in your .env file with your own token. This token is personal, so don't share it with others. If your token gets leaked it gives other people the ability to change bot permissions.
+
+Then install dependencies:
+```bash
+$ npm install
+```
+And start up your bot:
+```bash
+$ node .
+```
 
 # Licence
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
