@@ -22,8 +22,8 @@ module.exports = {
 
             got('https://www.reddit.com/r/' + link + '/random/.json').then(response => {
                 let content = JSON.parse(response.body); // gets data from random reddit post
-                
-                if (!content[0]) { // reloads when there is no content
+
+                if (!content[0] || !content[0].data || content.is_video || content.media) { // reloads when there is no content
                     createPost();
                 }
 
@@ -40,8 +40,17 @@ module.exports = {
                 embed.setColor('RANDOM');
                 embed.setFooter(`👍 ${postUpvotes}    💬 ${postNumComments}`);
 
-                if (postUpvotes < 10000 || isVideo === true) { // reloads if needed
+                if (content[0].data.children[0].data.url.toLowerCase().includes('v.redd.it') ||
+                    content[0].data.children[0].data.url.toLowerCase().includes('gallery') ||
+                    content[0].data.children[0].data.url.toLowerCase().includes('youtu') ||
+                    content[0].data.children[0].data.url.toLowerCase().includes('comments') ||
+                    content[0].data.children[0].data.url.toLowerCase().includes('insta') ||
+                    content[0].data.children[0].data.url.toLowerCase().includes('preview') ||
+                    content[0].data.children[0].data.url.toLowerCase().includes('www') ||
+                    content[0].data.children[0].data.url.toLowerCase().includes('imgur')) { // reloads if needed
                     createPost();
+                } else if (postUpvotes < 1000) {
+                    createPost()
                 } else {
                     message.channel.send(embed); // sends message to chat
                 }
