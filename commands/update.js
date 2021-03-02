@@ -7,10 +7,10 @@ module.exports = {
             .attachFiles(['./utils/logo.png'])
             .setTitle('My last updates') // puts variables in message (embedded message)
             .setColor('#f58b00')
-            .addField('1.1', 'Update 1.1 is now online and running! This update contains Tic Tac Toe, and better image content.', false)
+            .addField('1.1', 'Update 1.1 is now online and running! This update contains better image content and improved image filtering.', false)
             .addFields({
                 name: 'New commands',
-                value: '//ttt\n//update',
+                value: '//update',
                 inline: true
             },
             {
