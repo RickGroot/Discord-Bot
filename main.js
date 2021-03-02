@@ -56,7 +56,8 @@ client.on('message', message => {
     } else if (command === 'rps' || command === 'rockpaperscissors') {
         client.commands.get('rps').execute(message, args);
     } else if (command === 'ttt' || command === 'tictactoe'){
-        client.commands.get('ttt').execute(message, args);
+        message.channel.send('Tic Tac Toe is my worst enemy :angry:')
+        // client.commands.get('ttt').execute(message, args);
     } else if (command === 'update'){
         client.commands.get('update').execute(message, args);
     } else {
