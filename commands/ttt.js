@@ -3,9 +3,12 @@
 4 5 6
 7 8 9
 */
+
+// ------------------------------------------------------------------- THIS COMMAND IS BROKEN, OVERLOADS HEROKU CLIENT AND CRASHES BOT
+
 module.exports = {
     name: 'ttt',
-    description: 'this is a ttt command',
+    description: 'its just tic tac toe',
     execute(message, args) {
         const Discord = require('discord.js');
         const fs = require("fs");
