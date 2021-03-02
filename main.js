@@ -56,7 +56,6 @@ client.on('message', message => {
     } else if (command === 'rps' || command === 'rockpaperscissors') {
         client.commands.get('rps').execute(message, args);
     } else if (command === 'ttt' || command === 'tictactoe'){
-        // message.channel.send('Tic Tac Toe will be back soon...')
         client.commands.get('ttt').execute(message, args);
     } else if (command === 'update'){
         client.commands.get('update').execute(message, args);
@@ -73,5 +72,5 @@ client.on('ready', async () => {
     });
 });
 
-// client.login(process.env.DISCORD_TOKEN); //keep at last line of file
-client.login(process.env.TEST_TOKEN); //optional login for test bot
+client.login(process.env.DISCORD_TOKEN); //keep at last line of file
+// client.login(process.env.TEST_TOKEN); //optional login for test bot
