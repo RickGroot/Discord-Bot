@@ -2,13 +2,15 @@ module.exports = {
     name: 'strat',
     description: 'this gives a random csgo strat',
     execute(message, args) {
+        //---------------------------------------------------------------------------------------------------------- Requires and global variables
         const Discord = require('discord.js');
         const fs = require("fs");
-        let rawData = JSON.parse(fs.readFileSync("./commands/data/strat.json", "utf8"));
+        const rawData = JSON.parse(fs.readFileSync("./commands/data/strat.json", "utf8"));
         const maps = ['mirage', 'cache', 'inferno', 'overpass', 'train', 'nuke', 'dust2'];
         const sides = ['ct', 't'];
 
-        if (args.length < 1) { //calls appropriate function
+        //---------------------------------------------------------------------------------------------------------- Checks amount of arguments
+        if (args.length < 1) {
             noArgs();
         } else if (args.length === 1) {
             oneArg(args[0]);
@@ -18,6 +20,7 @@ module.exports = {
             explainCommand();
         }
 
+        //---------------------------------------------------------------------------------------------------------- Explains strat roulette command when false argument is passed
         function explainCommand() {
             const map = Math.floor(Math.random() * maps.length);
             const side = Math.floor(Math.random() * sides.length);
@@ -25,14 +28,15 @@ module.exports = {
             message.channel.send('Something is wrong! Try `//strat <map> <side>`, \n So like this: `//strat ' + maps[map] + ' ' + sides[side] + '`')
         }
 
-        function noArgs() { //function for when there are no arguments
-            message.channel.send('no args');
+        //---------------------------------------------------------------------------------------------------------- Generates array with general strats
+        function noArgs() {
             let data = rawData.reg;
             const random = Math.floor(Math.random() * data.length);
 
             sendStrat(data[random]);
         }
 
+        //---------------------------------------------------------------------------------------------------------- Generates array with general and team strats
         function oneArg(arg) {
             if (maps.includes(arg)) {
                 message.channel.send('I need a ct or t argument for this!')
@@ -59,6 +63,7 @@ module.exports = {
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------- Defines and checks both arguments
         function twoArgs(arg) { //function for when there are arguments
             if (maps.includes(arg[0]) && sides.includes(arg[1])) {
                 getAllData(arg[0], arg[1])
@@ -69,6 +74,7 @@ module.exports = {
             }
         }
 
+        //---------------------------------------------------------------------------------------------------------- Generates array with general, map and team strats
         function getAllData(map, side) {
             let data = rawData.reg;
             let allData = data.concat(rawData[map], rawData[side])
@@ -85,7 +91,9 @@ module.exports = {
             generate()
         }
 
+        //---------------------------------------------------------------------------------------------------------- Replaces tags in roulette descriptions
         function replaceRandom(desc, team) {
+            // declare all text types
             let pistols;
             let shotguns;
             let lmgs = ["Negev", "M249"];
@@ -94,6 +102,8 @@ module.exports = {
             let site = ["A", "B"];
             let direction = ["right", "left"];
             let special;
+
+            //defines team specific itemas
             if (team == "ct") {
                 pistols = ["USP-S", "Desert Eagle", "Duel Berettas", "Five-SeveN", "P250"];
                 shotguns = ["Nova", "XM-1014", "MAG-7"];
@@ -108,6 +118,7 @@ module.exports = {
                 special = "The bomb carrier";
             }
 
+            //replaces tags in comments with random item
             desc = desc.replace("@PISTOL", pistols[Math.floor(Math.random() * pistols.length)]);
             desc = desc.replace("@SHOTGUN", shotguns[Math.floor(Math.random() * shotguns.length)]);
             desc = desc.replace("@LMG", lmgs[Math.floor(Math.random() * lmgs.length)]);
@@ -119,18 +130,17 @@ module.exports = {
             desc = desc.replace("@SPECIAL", special);
 
             return desc;
-
         }
 
 
-
-        async function sendStrat(strat, team) {
+        //---------------------------------------------------------------------------------------------------------- Sends strat to channel
+        function sendStrat(strat, team) {
 
             const text = new Discord.MessageEmbed()
                 .setColor('#0dffd7')
                 .addField(strat.name, replaceRandom(strat.desc, team), false)
 
-            message.channel.send(text); //sends message to chat
+            message.channel.send(text);
         }
     }
 }
